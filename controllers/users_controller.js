@@ -20,3 +20,6 @@ module.exports.signIn = function(req,res){
       title: 'Codeial || SignIn'
   });
 };
+
+//get Sign Up Data
+
