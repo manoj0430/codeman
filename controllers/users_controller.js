@@ -69,4 +69,25 @@ module.exports.create = async function (req, res) {
 };
 
 // To sign in and create a session
-module.exports.createSession = function (req, res) {};
+module.exports.createSession = async function (req, res) {
+  //Find User 
+  try{
+    const user= await User.findOne({email: req.body.email});
+    if(user){
+      //check whether password is matched or not
+      if(user.password != req.body.password){
+        res.redirect('back');
+      }
+
+      //create session
+      res.cookie('user_id',user.id);
+      res.redirect('/users/profile');
+    }
+
+  }catch{
+    if(err){
+      console.log("Error in signing the user");
+      return
+    }
+  }
+};
