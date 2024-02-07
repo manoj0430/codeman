@@ -1,45 +1,45 @@
 const express = require("express");
-const cookieParser = require('cookie-parser');
+const cookieParser = require("cookie-parser");
 const app = express();
 const port = 8000;
 const expressLayouts = require("express-ejs-layouts");
-const db= require('./config/mongoose');
+const db = require("./config/mongoose");
 //used for session cookie
-const session= require('express-session');
-const passport = require('passport');
-const passportLocal = require('./config/passport-local-strategy');
+const session = require("express-session");
+const passport = require("passport");
+const passportLocal = require("./config/passport-local-strategy");
+
+
 
 // Use urlencoded to read post requests
 app.use(express.urlencoded());
 // to use cookie parser
 app.use(cookieParser());
 
-app.use(express.static('./assets'));
+app.use(express.static("./assets"));
 
 //we need to tell app to use this express-ejs before routes so that our layouts can be rendered in routes
 app.use(expressLayouts);
 
 //extract styles and scripts
-app.set('layout extractStyles', true);
-app.set('layout extractScripts',true);
-
-
-
-
+app.set("layout extractStyles", true);
+app.set("layout extractScripts", true);
 //Use View Engine
 app.set("view engine", "ejs");
 app.set("views", "./views");
 
 //middleware that takes session cookie and encrypts it
-app.use(session({
-  name: 'codeial',
-  secret: "blahsomething",
-  saveUninitialized: false,
-  resave: false,
-  cookie: {
-    maxAge: (1000 * 60 *100)
-  }
-}))
+app.use(
+  session({
+    name: "codeial",
+    secret: "blahsomething",
+    saveUninitialized: false,
+    resave: false,
+    cookie: {
+      maxAge: 1000 * 60 * 100,
+    }
+  })
+);
 
 app.use(passport.initialize());
 app.use(passport.session());
