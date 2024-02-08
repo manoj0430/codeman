@@ -78,3 +78,14 @@ module.exports.create = async function (req, res) {
 module.exports.createSession = function (req, res) {
   return res.redirect("/");
 };
+
+
+//signout
+
+module.exports.destroySession = function(req,res){
+  //first logout
+  req.logout(function(err) {
+    if (err) { return next(err); }
+    res.redirect('/');
+  });
+}

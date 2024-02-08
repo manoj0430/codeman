@@ -8,6 +8,8 @@ const db = require("./config/mongoose");
 const session = require("express-session");
 const passport = require("passport");
 const passportLocal = require("./config/passport-local-strategy");
+const MongoStore = require("connect-mongo");
+
 
 
 
@@ -37,7 +39,16 @@ app.use(
     resave: false,
     cookie: {
       maxAge: 1000 * 60 * 100,
-    }
+    },
+    store: MongoStore.create(
+      {
+        mongoUrl: "mongodb://127.0.0.1:27017/codeial_development",
+        autoRemove: "disabled",
+      },
+      function (err) {
+        console.log(err || "connect-mogodb setup okay");
+      }
+    ),
   })
 );
 
