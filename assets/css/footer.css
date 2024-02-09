@@ -1,0 +1,21 @@
+.footer_container {
+  font-family: sans-serif;
+  background-image: linear-gradient(to right, #185a9d, #43cea2);
+  display: flex;
+  justify-content: flex-start; }
+  .footer_container p {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 20px;
+    padding-top: 5px; }
+  .footer_container ul li {
+    list-style: none;
+    display: inline-block;
+    margin: 0 10px;
+    padding-top: 9px; }
+    .footer_container ul li a {
+      text-decoration: none;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 500; }

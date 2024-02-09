@@ -1,0 +1,31 @@
+.header_container {
+  font-family: sans-serif;
+  background-image: linear-gradient(to right, #43cea2, #185a9d);
+  display: flex;
+  justify-content: space-between;
+  h2 {
+    color: white;
+    margin: 20px 0 20px 15px;
+  }
+  .header_pages {
+    display: flex;
+    // justify-content: space-between;
+  }
+  ul {
+    // display: flex;
+    margin: 20px 0 18px;
+    li {
+      color: white;
+      font-size: 1.2rem;
+      display: inline-block;
+      margin: 0 10px;
+      list-style: none;
+
+      a {
+        color: white;
+        font-size: 1.2rem;
+        text-decoration: none;
+      }
+    }
+  }
+}
