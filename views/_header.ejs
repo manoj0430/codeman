@@ -5,7 +5,7 @@
   <div class="header_pages">
     <ul>
       <% if(locals.user) {%>
-        <li><%= user.name %></li>
+        <li class="header_name"><%= user.name %></li>
       <li>
         <a href="/users/signout">Sign Out</a>
       </li>
@@ -15,7 +15,7 @@
         <a href="/users/signin">Sign In</a>
       </li>
       <li>
-        <a href="/users/signout">Sign Out</a>
+        <a href="/users/signup">Sign Up</a>
       </li>
       <% } %>
     </ul>
