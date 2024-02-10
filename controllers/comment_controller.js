@@ -14,5 +14,7 @@ module.exports.create = async function(req,res){
 
         post.comments.push(comment);
         post.save();
+
+        res.redirect('/');
     }
 }
