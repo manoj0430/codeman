@@ -25,10 +25,12 @@ module.exports.destroy = async function(req,res){
       await post.deleteOne();
       await Comment.deleteMany({post: req.params.id})
       return res.redirect('back');
+    }else{
+      return res.redirect('back');
     }
    }catch(err){
-    console.log('Error in Deleting user:', err);
-    return res.redirect('back');
+    console.log('Error in Deleting Post:', err);
+    return;
    }
 
 }
