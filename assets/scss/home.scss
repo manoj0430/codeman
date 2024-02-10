@@ -1,0 +1,18 @@
+html, body{
+    height: 100%;
+}
+.home_container{
+    display: flex;
+
+    .feed_posts{
+        width: 70%;
+        padding: 10px;
+    }
+
+    .user_friends{
+        width: 30%;
+        padding: 10px;
+        border-left: 2px solid #000;
+        height: 100vh;
+    }
+}
