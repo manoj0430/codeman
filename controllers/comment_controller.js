@@ -8,7 +8,7 @@ module.exports.create = async function(req,res){
         const post= await Post.findById(req.body.post);
 
         if(post){
-            const comment = await Comment.create({
+            let comment = await Comment.create({
                 content: req.body.content,
                 post: req.body.post,
                 user: req.user._id
@@ -16,6 +16,14 @@ module.exports.create = async function(req,res){
     
             post.comments.push(comment);
             post.save();
+            if (req.xhr){
+                return res.status(200).json({
+                    data: {
+                        comment: comment
+                    },
+                    message: "Comment created!" 
+                });
+            }
             req.flash('success', 'Commented Successfully');
             res.redirect('/');
         }else{
@@ -39,7 +47,9 @@ try{
         //before deleting the comment directly we need to save postId in some variable
         let postId= comment.post;
         await comment.deleteOne();
-        await Post.findByIdAndUpdate(postId, { $pull: {comments: req.params.id}});
+       let comment= await Post.findByIdAndUpdate(postId, { $pull: {comments: req.params.id}});
+       // send the comment id which was deleted back to the views
+       
         req.flash('success', 'Comment Deleted Successfully');
         return res.redirect('back');
     }else{
