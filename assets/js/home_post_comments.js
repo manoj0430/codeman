@@ -27,9 +27,9 @@ class PostComments{
                 data: $(self).serialize(),
                 success: function(data){
                     console.log(data);
-                    let newComment = pSelf.newCommentDom(data.data.comment);
-                    $(`#post-comments-${postId}`).prepend(newComment);
-                    pSelf.deleteComment($(' .delete-comment-button', newComment));
+                    // let newComment = pSelf.newCommentDom(data.data.comment);
+                    $(`#post-comments-${postId}`).prepend(data);
+                    pSelf.deleteComment($(' .delete-comment-button', data));
 
                     new Noty({
                         theme: 'relax',

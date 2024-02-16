@@ -1,4 +1,6 @@
   const User = require("../models/user");
+  const fs= require('fs');
+  const path= require('path');
   module.exports.profile = async function (req, res) {
     const user = await User.findById(req.params.id);
 
@@ -11,12 +13,36 @@
   //update
   module.exports.update = async function(req,res){
     if(req.user.id == req.params.id){
-      await User.findByIdAndUpdate(req.params.id, req.body);
+      try{
+        let user=await User.findById(req.params.id);
 
-      return res.redirect('back');
-    }else{
-      return res.status(401).send('UnAuthorized');
+        User.uploadedAvatar(req, res, function(err){
+          if(err){
+            console.log(`Multer err: ${err}`);
+            return;
+          }
+          //we store the file alongside user
+          user.name = req.body.name;
+          user.email= req.body.email;
+          if(req.file){
+            if(user.avatar){
+              fs.unlinkSync(path.join(__dirname,'..',user.avatar));
+            }
+            user.avatar= User.avatarPath + '/' + req.file.filename;
+            console.log(user.avatar);
+          }
+          user.save();
+          return res.redirect('back');
+        })
+      }catch (err) {
+        console.log("error in the avatar", err);
+        return;
+      }
     }
+     
+    // }else{
+    //   return res.status(401).send('UnAuthorized');
+    // }
   }
 
   // Render SignUp page

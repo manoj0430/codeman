@@ -29,6 +29,8 @@ app.use(express.urlencoded());
 app.use(cookieParser());
 
 app.use(express.static("./assets"));
+//make the uploads path available to user
+app.use('/uploads', express.static(__dirname + '/uploads'));
 
 //we need to tell app to use this express-ejs before routes so that our layouts can be rendered in routes
 app.use(expressLayouts);
@@ -56,7 +58,7 @@ app.use(
         autoRemove: "disabled",
       },
       function (err) {
-        console.log(err || "connect-mogodb setup okay");
+        console.log(err || "connect-mongodb setup okay");
       }
     ),
   })
